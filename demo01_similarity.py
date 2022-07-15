@@ -24,6 +24,8 @@ encoder = VoiceEncoder()
 # smaller dataset contains 10 speakers with 10 utterances each. N.B. "wav" in variable names stands
 # for "waveform" and not the wav file extension.
 wav_fpaths = list(Path("audio_data", "librispeech_test-other").glob("**/*.flac"))
+print(wav_fpaths)
+print(type(wav_fpaths))
 # Group the wavs per speaker and load them using the preprocessing function provided with 
 # resemblyzer to load wavs in memory. It normalizes the volume, trims long silences and resamples 
 # the wav to the correct sampling rate.
