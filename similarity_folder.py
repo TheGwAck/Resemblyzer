@@ -25,20 +25,19 @@ encoder = VoiceEncoder()
 # for "waveform" and not the wav file extension.
 path = '/content/drive/MyDrive/Collabera_Jawad/test_audio'
 wav_fpaths = list(Path(path).glob("**/*.wav"))
-print(wav_fpaths)
-print(type(wav_fpaths))
+
 # Group the wavs per speaker and load them using the preprocessing function provided with 
 # resemblyzer to load wavs in memory. It normalizes the volume, trims long silences and resamples 
 # the wav to the correct sampling rate.
 speaker_wavs = {speaker: list(map(preprocess_wav, wav_fpaths)) for speaker, wav_fpaths in
                 groupby(tqdm(wav_fpaths, "Preprocessing wavs", len(wav_fpaths), unit="wavs"), 
                         lambda wav_fpath: wav_fpath.parent.stem)}
-print(speaker_wavs.values())
+print(speaker_wavs.values()[0])
 
 ## Similarity between two utterances from each speaker
 # Embed two utterances A and B for each speaker
-embeds_a = np.array([encoder.embed_utterance(wavs[0]) for wavs in speaker_wavs.values()])
-embeds_b = np.array([encoder.embed_utterance(wavs[1]) for wavs in speaker_wavs.values()])
+embeds_a = np.array([encoder.embed_utterance(wavs[0]) for wavs in speaker_wavs.values()[0]])
+embeds_b = np.array([encoder.embed_utterance(wavs[1]) for wavs in speaker_wavs.values()[0]])
 # Each array is of shape (num_speakers, embed_size) which should be (10, 256) if you haven't 
 # changed anything.
 print("Shape of embeddings: %s" % str(embeds_a.shape))
