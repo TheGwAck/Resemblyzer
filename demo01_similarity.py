@@ -31,7 +31,7 @@ print(type(wav_fpaths))
 # the wav to the correct sampling rate.
 speaker_wavs = {speaker: list(map(preprocess_wav, wav_fpaths)) for speaker, wav_fpaths in
                 groupby(tqdm(wav_fpaths, "Preprocessing wavs", len(wav_fpaths), unit="wavs"), 
-                        lambda wav_fpath: wav_fpath.parent.stem)}
+                        lambda wav_fpath: print(wav_fpath.parent.stem))}
 
 
 ## Similarity between two utterances from each speaker
