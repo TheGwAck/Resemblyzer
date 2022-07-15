@@ -33,7 +33,7 @@ print(type(wav_fpaths))
 speaker_wavs = {speaker: list(map(preprocess_wav, wav_fpaths)) for speaker, wav_fpaths in
                 groupby(tqdm(wav_fpaths, "Preprocessing wavs", len(wav_fpaths), unit="wavs"), 
                         lambda wav_fpath: wav_fpath.parent.stem)}
-
+print(speaker_wavs.values())
 
 ## Similarity between two utterances from each speaker
 # Embed two utterances A and B for each speaker
