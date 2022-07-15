@@ -31,13 +31,14 @@ wav_fpaths = list(Path(path).glob("**/*.wav"))
 # the wav to the correct sampling rate.
 speaker_wavs = {speaker: list(map(preprocess_wav, wav_fpaths)) for speaker, wav_fpaths in
                 groupby(tqdm(wav_fpaths, "Preprocessing wavs", len(wav_fpaths), unit="wavs"), 
-                        lambda wav_fpath: wav_fpath.parent.stem)}
-print(speaker_wavs.values()[0])
+                        lambda wav_fpath: print(wav_fpath.parent.stem))}
+for wavs in speaker_wavs.values():
+    print(wavs)
 
 ## Similarity between two utterances from each speaker
 # Embed two utterances A and B for each speaker
-embeds_a = np.array([encoder.embed_utterance(wavs[0]) for wavs in speaker_wavs.values()[0]])
-embeds_b = np.array([encoder.embed_utterance(wavs[1]) for wavs in speaker_wavs.values()[0]])
+embeds_a = np.array([encoder.embed_utterance(wavs[0]) for wavs in speaker_wavs.values()])
+embeds_b = np.array([encoder.embed_utterance(wavs[1]) for wavs in speaker_wavs.values()])
 # Each array is of shape (num_speakers, embed_size) which should be (10, 256) if you haven't 
 # changed anything.
 print("Shape of embeddings: %s" % str(embeds_a.shape))
