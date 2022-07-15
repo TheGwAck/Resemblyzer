@@ -64,6 +64,8 @@ spk_embeds_b = np.array([encoder.embed_speaker(wavs[len(wavs) // 2:]) \
                          for wavs in speaker_wavs.values()])
 spk_sim_matrix = np.inner(spk_embeds_a, spk_embeds_b)
 
+print(spk_sim_matrix)
+
 
 ## Draw the plots
 fix, axs = plt.subplots(2, 2, figsize=(8, 10))
