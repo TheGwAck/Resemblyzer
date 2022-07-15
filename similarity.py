@@ -41,10 +41,10 @@ wav_2_fpaths = list(Path(path, speaker_2).glob("*.wav"))
 
 speaker_1_wavs = {speaker_1: list(map(preprocess_wav, wav_1_fpaths)) for wav_1_fpaths in
                 groupby(tqdm(wav_1_fpaths, "Preprocessing wavs", len(wav_1_fpaths), unit="wavs"), 
-                        lambda wav_1_fpath: wav_1_fpath.parent.stem)}
+                        lambda wav_1_fpath: wav_1_fpath.parent)}
 speaker_2_wavs = {speaker_2: list(map(preprocess_wav, wav_2_fpaths)) for wav_2_fpaths in
                 groupby(tqdm(wav_2_fpaths, "Preprocessing wavs", len(wav_2_fpaths), unit="wavs"), 
-                        lambda wav_2_fpath: wav_2_fpath.parent.stem)}
+                        lambda wav_2_fpath: wav_2_fpath.parent)}
 speaker_1_wavs.update(speaker_2_wavs) 
 speaker_wavs = speaker_1_wavs
 
